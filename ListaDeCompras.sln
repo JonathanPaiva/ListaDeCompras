@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32804.467
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListaDeCompras.API", "ListaDeCompras.API\ListaDeCompras.API.csproj", "{02D04455-AFDF-4C63-BE2D-99168748EFE2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02D04455-AFDF-4C63-BE2D-99168748EFE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02D04455-AFDF-4C63-BE2D-99168748EFE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02D04455-AFDF-4C63-BE2D-99168748EFE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02D04455-AFDF-4C63-BE2D-99168748EFE2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6379D1A4-1FAD-419F-939F-CE8B97B6F9C6}
+	EndGlobalSection
+EndGlobal
