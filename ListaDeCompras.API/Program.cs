@@ -1,4 +1,5 @@
 using ListaDeCompras.API.Data;
+using ListaDeCompras.API.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
+
+builder.Services.AddScoped<ISetoresRepository, SetorRepository>();
 
 builder.Services.AddControllers();
 

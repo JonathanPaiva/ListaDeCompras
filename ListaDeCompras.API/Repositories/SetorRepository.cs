@@ -1,6 +1,9 @@
 ﻿using ListaDeCompras.API.Data;
 using ListaDeCompras.API.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 
@@ -8,42 +11,58 @@ namespace ListaDeCompras.API.Repositories
 {
     public class SetorRepository : ISetoresRepository
     {
-        private readonly ApplicationDbContext context;
+        public readonly ApplicationDbContext _context;
 
         public SetorRepository(ApplicationDbContext context)
         {
-            this.context = context; 
+            this._context = context; 
         }
 
         public async Task<Setor> CreateAsync(Setor setor)
         {
-            context.Setores.Add(setor);
-            await context.SaveChangesAsync();
+            _context.Setores.AddAsync(setor);
+            await _context.SaveChangesAsync();
 
-            return setor;   
+            return setor;
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task<IResult> DeleteAsync(Guid id)
         {
-            Setor setor = context.Setores.FirstOrDefault(s => s.Id == id);
+            Setor setor = _context.Setores.FirstOrDefault(s => s.Id == id);
 
-            context.Setores.Remove(setor);
-            await context.SaveChangesAsync();
+            if (setor == null)
+            {
+                return Results.NotFound();
+            }
+
+            _context.Setores.Remove(setor);
+            await _context.SaveChangesAsync();
+
+            return Results.Ok();
         }
 
-        public async Task EditAsync(Setor setor)
+        public async Task<Setor> UpdateAsync([FromBody] Setor setor, Guid id) //[FromBody] Setor setor
         {
-            throw new NotImplementedException();
+            Setor setorDb = await _context.Setores.FirstOrDefaultAsync(s => s.Id == id);
+
+            setorDb.Nome = setor.Nome;
+            setorDb.EditadoPor = setor.EditadoPor;
+            setorDb.EditadoEm = DateTime.Now;
+            setorDb.Desativado = setor.Desativado;
+
+            await _context.SaveChangesAsync();
+
+            return setorDb;
         }
 
-        public async Task<ICollection<Setor>> GetAllAsync()
+        public async Task<IEnumerable<Setor>> GetAsync()
         {
-            return await context.Setores.ToListAsync();
+            return await _context.Setores.ToListAsync();
         }
 
         public async Task<Setor> GetAsync(Guid id)
         {
-            Setor setor = context.Setores.FirstOrDefault(s => s.Id == id);
+            Setor setor = await _context.Setores.FirstOrDefaultAsync(s => s.Id == id);
 
             return setor;
         }

@@ -1,18 +1,19 @@
 ﻿using ListaDeCompras.API.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.ObjectModel;
 
 namespace ListaDeCompras.API.Repositories
 {
     public interface ISetoresRepository
     {
-        Task<ICollection<Setor>> GetAllAsync();
+        public Task<IEnumerable<Setor>> GetAsync();
 
-        Task<Setor> GetAsync(Guid id);
+        public Task<Setor> GetAsync(Guid id);
 
-        Task<Setor> CreateAsync(Setor setor);
+        public Task<Setor> CreateAsync(Setor setor);
 
-        Task EditAsync(Setor setor);
+        public Task<Setor> UpdateAsync([FromBody] Setor setor, Guid id);
 
-        Task DeleteAsync(Guid id);
+        public Task<IResult> DeleteAsync(Guid id);
     }
 }
