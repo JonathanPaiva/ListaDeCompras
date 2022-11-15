@@ -11,6 +11,3 @@ Criar uma Lista de Compras com base nos Itens já cadastrados
 Manipular essas informações - CRUD básico
 
 Dev: JonathanPaiva
-
-Acompanhamento de Desenvolvimento
-https://trello.com/b/30aNGNuT/desenvolvimento-api
