@@ -42,7 +42,7 @@ namespace ListaDeCompras.API.Repositories
             return new OkResult();
         }
 
-        public async Task<ActionResult<Setor>> UpdateAsync([FromBody] Setor setor, Guid id) //[FromBody] Setor setor
+        public async Task<ActionResult<Setor>> UpdateAsync([FromBody] Setor setor, Guid id)
         {
             Setor setorDb = await _context.Setores.FirstOrDefaultAsync(s => s.Id == id);
 
