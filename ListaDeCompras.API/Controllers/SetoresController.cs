@@ -9,7 +9,7 @@ using Microsoft.VisualBasic;
 
 namespace ListaDeCompras.API.Controllers
 {
-    [Route("[controller]")]
+    [Route("setores")]
     [ApiController]
     public class SetoresController : ControllerBase
     {
@@ -22,37 +22,35 @@ namespace ListaDeCompras.API.Controllers
 
         // GET: /<SetoresController>
         [HttpGet]
-        public async Task<IEnumerable<Setor>> Get()
+        public async Task<ActionResult<IEnumerable<Setor>>> Get()
         {
             return await _setoresRepository.GetAsync();
         }
 
         // GET /<SetoresController>/5aas-dhalk-sdalkj
         [HttpGet("{id}")]
-        public async Task<Setor> Get(Guid id)
+        public async Task<ActionResult<Setor>> Get(Guid id)
         {
             return await _setoresRepository.GetAsync(id);
         }
 
         // POST /<SetoresController>
         [HttpPost]
-        public async Task<Setor> Create([FromBody] Setor setor)
+        public async Task<ActionResult<Setor>> Create([FromBody] Setor setor)
         {
-            await _setoresRepository.CreateAsync(setor);
-
-            return setor;
+            return await _setoresRepository.CreateAsync(setor);
         }
 
         // PUT /<SetoresController>/5
         [HttpPut("{id}")]
-        public async Task<Setor> UpdateAsync([FromBody] Setor setor, Guid id)
+        public async Task<ActionResult<Setor>> UpdateAsync([FromBody] Setor setor, Guid id)
         {
             return await _setoresRepository.UpdateAsync(setor, id);
         }
 
         // DELETE /<SetoresController>/5
         [HttpDelete("{id}")]
-        public async Task<IResult> Delete(Guid id)
+        public async Task<ActionResult> Delete(Guid id)
         {
             return await _setoresRepository.DeleteAsync(id);
         }
