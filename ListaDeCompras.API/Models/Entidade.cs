@@ -2,7 +2,7 @@
 {
     public abstract class Entidade
     {
-        public Guid Id { get; private set; }
+        public Guid Id { get; set; }
         public string Nome { get; set; }
         public string CriadoPor { get; set; }
         public DateTime CriadoEm { get; set; }

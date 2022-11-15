@@ -12,11 +12,14 @@ namespace ListaDeCompras.API.Data
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
         {
+
         }
 
         //Configurçaões Padrões para Entidades no Banco de Dados
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
+
             builder.Ignore<Entidade>();
 
             #region Item
