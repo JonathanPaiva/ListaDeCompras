@@ -11,6 +11,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 
 builder.Services.AddScoped<IAmbienteRepository, AmbienteRepository>();
+builder.Services.AddScoped<IItemRepository, ItemRepository>();
 
 builder.Services.AddControllers();
 

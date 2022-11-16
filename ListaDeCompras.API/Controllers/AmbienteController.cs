@@ -10,64 +10,64 @@ namespace ListaDeCompras.API.Controllers
     [ApiController]
     public class AmbienteController : ControllerBase
     {
-        private readonly IAmbienteRepository _setoresRepository;
+        private readonly IAmbienteRepository _ambienteRepository;
 
-        public AmbienteController(IAmbienteRepository setorRepository)
+        public AmbienteController(IAmbienteRepository ambienteRepository)
         {
-            this._setoresRepository = setorRepository;
+            this._ambienteRepository = ambienteRepository;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Ambiente>>> Get()
         {
-            var setores = await _setoresRepository.GetAsync();
+            var ambientes = await _ambienteRepository.GetAsync();
                         
-            if (setores == null || setores.Count() == 0)
+            if (ambientes == null || ambientes.Count() == 0)
             {
                 return new NoContentResult();
             }
 
-            return new OkObjectResult(setores);
+            return new OkObjectResult(ambientes);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Ambiente>> Get(Guid id)
         {
-            Ambiente setor = await _setoresRepository.GetAsync(id);
+            Ambiente ambiente = await _ambienteRepository.GetAsync(id);
 
-            if (setor == null)
+            if (ambiente == null)
             {
                 return new NotFoundResult();
             }
 
-            return new OkObjectResult(setor);
+            return new OkObjectResult(ambiente);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Ambiente>> Create([FromBody] Ambiente setor)
+        public async Task<ActionResult<Ambiente>> Create([FromBody] Ambiente ambiente)
         {
-            await _setoresRepository.CreateAsync(setor);
+            await _ambienteRepository.CreateAsync(ambiente);
 
-            return new CreatedResult($"ambientes/{setor.Id}", setor);  
+            return new CreatedResult($"ambientes/{ambiente.Id}", ambiente);  
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Ambiente>> UpdateAsync([FromBody] Ambiente setor, Guid id)
+        public async Task<ActionResult<Ambiente>> UpdateAsync([FromBody] Ambiente ambiente, Guid id)
         {
-            Ambiente setorDb = await _setoresRepository.UpdateAsync(setor, id);
+            Ambiente ambienteDb = await _ambienteRepository.UpdateAsync(ambiente, id);
 
-            if(setorDb == null)
+            if(ambienteDb == null)
             {
                 return new NotFoundResult();
             }
 
-            return new OkObjectResult(setorDb);
+            return new OkObjectResult(ambienteDb);
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(Guid id)
         {
-            bool deletado = await _setoresRepository.DeleteAsync(id);
+            bool deletado = await _ambienteRepository.DeleteAsync(id);
 
             if (deletado)
             {

@@ -20,11 +20,10 @@ namespace ListaDeCompras.API.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Ignore<Entidade>();
-
             #region Item
                 builder.Entity<Item>().Property(i => i.Nome).IsRequired();
             #endregion
+
         }
 
         //Configurações padrões para todos os tipos de campos de acordo com o que foi estipulado
