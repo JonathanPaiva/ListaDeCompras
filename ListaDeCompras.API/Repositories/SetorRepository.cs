@@ -19,36 +19,36 @@ namespace ListaDeCompras.API.Repositories
             this._context = context; 
         }
 
-        public async Task<ActionResult<Setor>> CreateAsync(Setor setor)
+        public async Task<Setor> CreateAsync(Setor setor)
         {
             _context.Setores.AddAsync(setor);
             await _context.SaveChangesAsync();
 
-            return new CreatedResult($"setores/{setor.Id}", setor);
+            return setor;
         }
 
-        public async Task<ActionResult> DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(Guid id)
         {
-            Setor setor = _context.Setores.FirstOrDefault(s => s.Id == id);
+            Setor setor = await GetAsync(id);
 
             if (setor == null)
             {
-                return new NotFoundResult();
+                return false;
             }
 
             _context.Setores.Remove(setor);
             await _context.SaveChangesAsync();
 
-            return new OkResult();
+            return true;
         }
 
-        public async Task<ActionResult<Setor>> UpdateAsync([FromBody] Setor setor, Guid id)
+        public async Task<Setor> UpdateAsync([FromBody] Setor setor, Guid id)
         {
-            Setor setorDb = await _context.Setores.FirstOrDefaultAsync(s => s.Id == id);
+            Setor setorDb = await GetAsync(id);
 
             if (setorDb == null)
             {
-                return new NotFoundResult();
+                return setorDb;
             }
 
             setorDb.Nome = setor.Nome;
@@ -61,26 +61,16 @@ namespace ListaDeCompras.API.Repositories
             return setorDb;
         }
 
-        public async Task<ActionResult<IEnumerable<Setor>>> GetAsync()
+        public async Task<IEnumerable<Setor>> GetAsync()
         {
             IList<Setor> setores = await _context.Setores.ToListAsync();
-
-            if(setores == null || setores.Count == 0)
-            {
-                return new NoContentResult();
-            }
 
             return await _context.Setores.ToListAsync();
         }
 
-        public async Task<ActionResult<Setor>> GetAsync(Guid id)
+        public async Task<Setor> GetAsync(Guid id)
         {
             Setor setor = await _context.Setores.FirstOrDefaultAsync(s => s.Id == id);
-
-            if (setor == null)
-            {
-                return new NotFoundResult();
-            }
 
             return setor;
         }

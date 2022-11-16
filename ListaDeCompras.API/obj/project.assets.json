@@ -1032,19 +1032,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jonat\\.nuget\\packages\\": {}
+    "C:\\Users\\jpaiva\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Estudos\\Net\\Projetos\\AulaCSharpProjeto\\ListaDeCompras\\ListaDeCompras.API\\ListaDeCompras.API.csproj",
+      "projectUniqueName": "C:\\Estudos\\DotNet\\CSharpAngular\\ProjetoCSharp\\ListaDeCompras\\ListaDeCompras.API\\ListaDeCompras.API.csproj",
       "projectName": "ListaDeCompras.API",
-      "projectPath": "E:\\Estudos\\Net\\Projetos\\AulaCSharpProjeto\\ListaDeCompras\\ListaDeCompras.API\\ListaDeCompras.API.csproj",
-      "packagesPath": "C:\\Users\\jonat\\.nuget\\packages\\",
-      "outputPath": "E:\\Estudos\\Net\\Projetos\\AulaCSharpProjeto\\ListaDeCompras\\ListaDeCompras.API\\obj\\",
+      "projectPath": "C:\\Estudos\\DotNet\\CSharpAngular\\ProjetoCSharp\\ListaDeCompras\\ListaDeCompras.API\\ListaDeCompras.API.csproj",
+      "packagesPath": "C:\\Users\\jpaiva\\.nuget\\packages\\",
+      "outputPath": "C:\\Estudos\\DotNet\\CSharpAngular\\ProjetoCSharp\\ListaDeCompras\\ListaDeCompras.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\jonat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jpaiva\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1114,7 +1114,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
