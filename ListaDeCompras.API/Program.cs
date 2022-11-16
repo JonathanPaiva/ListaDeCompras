@@ -10,7 +10,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
-builder.Services.AddScoped<ISetoresRepository, SetorRepository>();
+builder.Services.AddScoped<IAmbienteRepository, AmbienteRepository>();
 
 builder.Services.AddControllers();
 

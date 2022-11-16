@@ -2,8 +2,8 @@
 {
     public class Item : Entidade
     {
-        public Guid SetorId { get; private set; }
-        public Setor Setor { get; private set; }
+        public Guid AmbienteId { get; private set; }
+        public Ambiente Ambiente { get; private set; }
 
         public Item(string nome, string criadoPor, string editadoPor, bool desativado)
         {

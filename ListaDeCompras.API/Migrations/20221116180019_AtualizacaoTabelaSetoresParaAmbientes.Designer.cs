@@ -3,6 +3,7 @@ using System;
 using ListaDeCompras.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ListaDeCompras.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221116180019_AtualizacaoTabelaSetoresParaAmbientes")]
+    partial class AtualizacaoTabelaSetoresParaAmbientes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,9 +62,6 @@ namespace ListaDeCompras.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("AmbienteId")
-                        .HasColumnType("char(36)");
-
                     b.Property<DateTime>("CriadoEm")
                         .HasColumnType("datetime(6)");
 
@@ -87,22 +86,25 @@ namespace ListaDeCompras.API.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
+                    b.Property<Guid>("SetorId")
+                        .HasColumnType("char(36)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AmbienteId");
+                    b.HasIndex("SetorId");
 
                     b.ToTable("Itens");
                 });
 
             modelBuilder.Entity("ListaDeCompras.API.Models.Item", b =>
                 {
-                    b.HasOne("ListaDeCompras.API.Models.Ambiente", "Ambiente")
+                    b.HasOne("ListaDeCompras.API.Models.Ambiente", "Setor")
                         .WithMany()
-                        .HasForeignKey("AmbienteId")
+                        .HasForeignKey("SetorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Ambiente");
+                    b.Navigation("Setor");
                 });
 #pragma warning restore 612, 618
         }

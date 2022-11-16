@@ -1,8 +1,8 @@
 ﻿namespace ListaDeCompras.API.Models
 {
-    public class Setor: Entidade
+    public class Ambiente: Entidade
     {
-        public Setor(string nome, string criadoPor, string editadoPor, bool desativado)
+        public Ambiente(string nome, string criadoPor, string editadoPor, bool desativado)
         {
             Nome = nome;
             CriadoPor = criadoPor;

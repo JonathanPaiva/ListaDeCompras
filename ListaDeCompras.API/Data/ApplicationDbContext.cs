@@ -7,7 +7,7 @@ namespace ListaDeCompras.API.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public DbSet<Setor> Setores {get; set;}
+        public DbSet<Ambiente> Ambientes {get; set;}
         public DbSet<Item> Itens { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 

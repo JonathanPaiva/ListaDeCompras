@@ -1,27 +1,24 @@
-﻿using ListaDeCompras.API.Data;
-using ListaDeCompras.API.Models;
+﻿using ListaDeCompras.API.Models;
 using ListaDeCompras.API.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ListaDeCompras.API.Controllers
 {
-    [Route("setores")]
+    [Route("ambientes")]
     [ApiController]
-    public class SetorController : ControllerBase
+    public class AmbienteController : ControllerBase
     {
-        private readonly ISetoresRepository _setoresRepository;
+        private readonly IAmbienteRepository _setoresRepository;
 
-        public SetorController(ISetoresRepository setorRepository)
+        public AmbienteController(IAmbienteRepository setorRepository)
         {
             this._setoresRepository = setorRepository;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Setor>>> Get()
+        public async Task<ActionResult<IEnumerable<Ambiente>>> Get()
         {
             var setores = await _setoresRepository.GetAsync();
                         
@@ -34,9 +31,9 @@ namespace ListaDeCompras.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Setor>> Get(Guid id)
+        public async Task<ActionResult<Ambiente>> Get(Guid id)
         {
-            Setor setor = await _setoresRepository.GetAsync(id);
+            Ambiente setor = await _setoresRepository.GetAsync(id);
 
             if (setor == null)
             {
@@ -47,17 +44,17 @@ namespace ListaDeCompras.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Setor>> Create([FromBody] Setor setor)
+        public async Task<ActionResult<Ambiente>> Create([FromBody] Ambiente setor)
         {
             await _setoresRepository.CreateAsync(setor);
 
-            return new CreatedResult($"setores/{setor.Id}", setor);  
+            return new CreatedResult($"ambientes/{setor.Id}", setor);  
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Setor>> UpdateAsync([FromBody] Setor setor, Guid id)
+        public async Task<ActionResult<Ambiente>> UpdateAsync([FromBody] Ambiente setor, Guid id)
         {
-            Setor setorDb = await _setoresRepository.UpdateAsync(setor, id);
+            Ambiente setorDb = await _setoresRepository.UpdateAsync(setor, id);
 
             if(setorDb == null)
             {
