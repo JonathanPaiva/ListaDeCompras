@@ -68,11 +68,10 @@ namespace ListaDeCompras.API.Repositories
                 return itemDb;
             }
 
-            itemDb.Nome = item.Nome;
-            itemDb.EditadoPor = item.EditadoPor;
-            itemDb.EditadoEm = DateTime.Now;
-            itemDb.Desativado = item.Desativado;
-            itemDb.AmbienteId = item.AmbienteId;
+            itemDb.SetNome(item.Nome);
+            itemDb.SetEditado(item.EditadoPor);
+            itemDb.SetDesativado(item.Desativado);
+            itemDb.SetAmbiente(item.AmbienteId);
 
             await _context.SaveChangesAsync();
 

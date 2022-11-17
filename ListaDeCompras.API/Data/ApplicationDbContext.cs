@@ -22,6 +22,11 @@ namespace ListaDeCompras.API.Data
             builder.Entity<Item>()
                 .Property(i => i.Nome)
                 .IsRequired();
+
+            builder.Entity<Ambiente>()
+                .HasMany(i => i.Itens)
+                .WithOne(a => a.Ambiente)
+                .OnDelete(DeleteBehavior.Restrict);
             #endregion
         }
 

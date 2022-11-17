@@ -2,6 +2,8 @@
 using ListaDeCompras.API.Interfaces;
 using ListaDeCompras.API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace ListaDeCompras.API.Controllers
 {
@@ -71,8 +73,17 @@ namespace ListaDeCompras.API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(Guid id)
         {
-            bool deletado = await _ambienteRepository.DeleteAmbienteAsync(id);
+            bool deletado;
 
+            try
+            {
+                deletado = await _ambienteRepository.DeleteAmbienteAsync(id);
+            }
+            catch(DbUpdateException ex)
+            {
+                return new UnauthorizedResult();
+            }
+            
             if (deletado)
             {
                 return new OkResult();

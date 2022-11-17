@@ -54,10 +54,9 @@ namespace ListaDeCompras.API.Repositories
                 return ambienteDb;
             }
 
-            ambienteDb.Nome = ambienteDTO.Nome;
-            ambienteDb.EditadoPor = ambienteDTO.EditadoPor;
-            ambienteDb.EditadoEm = DateTime.Now;
-            ambienteDb.Desativado = ambienteDTO.Desativado;
+            ambienteDb.SetNome(ambienteDTO.Nome);
+            ambienteDb.SetEditado(ambienteDTO.EditadoPor);
+            ambienteDb.SetDesativado(ambienteDTO.Desativado);
 
             await _context.SaveChangesAsync();
 
