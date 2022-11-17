@@ -1,5 +1,6 @@
-﻿using ListaDeCompras.API.Models;
-using ListaDeCompras.API.Repositories;
+﻿using ListaDeCompras.API.DTO;
+using ListaDeCompras.API.Interfaces;
+using ListaDeCompras.API.Models;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -44,17 +45,22 @@ namespace ListaDeCompras.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Item>> Create([FromBody] Item item)
+        public async Task<ActionResult<Item>> Create([FromBody] ItemDTO item)
         {
-            await _itemRepository.CreateAsync(item);
+            Item novoItem = await _itemRepository.CreateAsync(item);
 
-            return new CreatedResult($"ambientes/{item.Id}", item);  
+            if (novoItem == null)
+            {
+                return new NotFoundResult();
+            }
+
+            return new CreatedResult($"ambientes/{novoItem.Id}", novoItem);  
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Item>> UpdateAsync([FromBody] Item item, Guid id)
+        public async Task<ActionResult<Item>> UpdateAsync([FromBody] ItemDTO itemDTO, Guid id)
         {
-            Item itemDb = await _itemRepository.UpdateAsync(item, id);
+            Item itemDb = await _itemRepository.UpdateAsync(itemDTO, id);
 
             if(itemDb == null)
             {

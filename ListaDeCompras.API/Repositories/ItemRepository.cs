@@ -1,4 +1,6 @@
 ﻿using ListaDeCompras.API.Data;
+using ListaDeCompras.API.DTO;
+using ListaDeCompras.API.Interfaces;
 using ListaDeCompras.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,19 +9,36 @@ namespace ListaDeCompras.API.Repositories
 {
     public class ItemRepository : IItemRepository
     {
-        public readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         public ItemRepository(ApplicationDbContext context)
         {
             this._context = context; 
         }
 
-        public async Task<Item> CreateAsync(Item item)
+        public async Task<Item> CreateAsync(ItemDTO itemDTO)
         {
-            _context.Itens.AddAsync(item);
+            Ambiente ambiente = await _context.Ambientes.FindAsync(itemDTO.AmbienteId);
+            
+            Item novoItem = null;
+
+            if (ambiente == null)
+            {
+                return novoItem;
+            }
+
+            novoItem = new Item(
+                itemDTO.Nome,
+                itemDTO.CriadoPor,
+                itemDTO.EditadoPor,
+                itemDTO.Desativado,
+                itemDTO.AmbienteId
+                ); 
+
+            _context.Itens.AddAsync(novoItem);
             await _context.SaveChangesAsync();
 
-            return item;
+            return novoItem;
         }
 
         public async Task<bool> DeleteAsync(Guid id)
@@ -37,7 +56,7 @@ namespace ListaDeCompras.API.Repositories
             return true;
         }
 
-        public async Task<Item> UpdateAsync([FromBody] Item item, Guid id)
+        public async Task<Item> UpdateAsync([FromBody] ItemDTO item, Guid id)
         {
             Item itemDb = await GetAsync(id);
 
@@ -50,6 +69,7 @@ namespace ListaDeCompras.API.Repositories
             itemDb.EditadoPor = item.EditadoPor;
             itemDb.EditadoEm = DateTime.Now;
             itemDb.Desativado = item.Desativado;
+            itemDb.AmbienteId = item.AmbienteId;
 
             await _context.SaveChangesAsync();
 
@@ -58,17 +78,14 @@ namespace ListaDeCompras.API.Repositories
 
         public async Task<IEnumerable<Item>> GetAsync()
         {
-            IList<Item> itens = await _context.Itens
-                .ToListAsync();
+            IList<Item> itens = await _context.Itens.ToListAsync();
 
             return await _context.Itens.ToListAsync();
         }
 
         public async Task<Item> GetAsync(Guid id)
         {
-            Item item = await _context.Itens
-                .FirstOrDefaultAsync(i=> i.Id == id)
-                ;
+            Item item = await _context.Itens.FindAsync(id);
 
             return item;
         }

@@ -1,13 +1,8 @@
 ﻿using ListaDeCompras.API.Data;
+using ListaDeCompras.API.Interfaces;
 using ListaDeCompras.API.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
-using System.Collections;
-using System.Collections.ObjectModel;
-using System.Diagnostics.CodeAnalysis;
-
 namespace ListaDeCompras.API.Repositories
 {
     public class AmbienteRepository : IAmbienteRepository
@@ -19,7 +14,7 @@ namespace ListaDeCompras.API.Repositories
             this._context = context; 
         }
 
-        public async Task<Ambiente> CreateAsync(Ambiente ambiente)
+        public async Task<Ambiente> CreateAmbienteAsync(Ambiente ambiente)
         {
             _context.Ambientes.AddAsync(ambiente);
             await _context.SaveChangesAsync();
@@ -27,9 +22,9 @@ namespace ListaDeCompras.API.Repositories
             return ambiente;
         }
 
-        public async Task<bool> DeleteAsync(Guid id)
+        public async Task<bool> DeleteAmbienteAsync(Guid id)
         {
-            Ambiente ambiente = await GetAsync(id);
+            Ambiente ambiente = await GetAmbienteAsync(id);
 
             if (ambiente == null)
             {
@@ -42,9 +37,9 @@ namespace ListaDeCompras.API.Repositories
             return true;
         }
 
-        public async Task<Ambiente> UpdateAsync([FromBody] Ambiente ambiente, Guid id)
+        public async Task<Ambiente> UpdateAmbienteAsync([FromBody] Ambiente ambiente, Guid id)
         {
-            Ambiente ambienteDb = await GetAsync(id);
+            Ambiente ambienteDb = await GetAmbienteAsync(id);
 
             if (ambienteDb == null)
             {
@@ -61,14 +56,14 @@ namespace ListaDeCompras.API.Repositories
             return ambienteDb;
         }
 
-        public async Task<IEnumerable<Ambiente>> GetAsync()
+        public async Task<IEnumerable<Ambiente>> GetAmbienteAsync()
         {
             IList<Ambiente> ambientes = await _context.Ambientes.ToListAsync();
 
             return await _context.Ambientes.ToListAsync();
         }
 
-        public async Task<Ambiente> GetAsync(Guid id)
+        public async Task<Ambiente> GetAmbienteAsync(Guid id)
         {
             Ambiente ambiente = await _context.Ambientes.FirstOrDefaultAsync(a => a.Id == id);
 

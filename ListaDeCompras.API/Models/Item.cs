@@ -11,8 +11,16 @@ namespace ListaDeCompras.API.Models
         public string EditadoPor { get; set; }
         public DateTime EditadoEm { get; set; }
         public bool Desativado { get; set; }
+        public Guid AmbienteId { get; set; }
+        [JsonIgnore]
+        public Ambiente Ambiente { get; set; }
 
-        public Item(string nome, string criadoPor, string editadoPor, bool desativado)
+        public Item()
+        {
+
+        }
+
+        public Item(string nome, string criadoPor, string editadoPor, bool desativado, Guid ambienteId)
         {
             Id = new Guid();
             
@@ -20,6 +28,8 @@ namespace ListaDeCompras.API.Models
             CriadoPor = criadoPor;
             EditadoPor = editadoPor;
             Desativado = desativado;
+
+            AmbienteId = ambienteId;
 
             CriadoEm = DateTime.Now;
             EditadoEm = DateTime.Now;

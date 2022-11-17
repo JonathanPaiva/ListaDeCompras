@@ -1,7 +1,5 @@
 ﻿using ListaDeCompras.API.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace ListaDeCompras.API.Data
 {
@@ -21,9 +19,10 @@ namespace ListaDeCompras.API.Data
             base.OnModelCreating(builder);
 
             #region Item
-                builder.Entity<Item>().Property(i => i.Nome).IsRequired();
+            builder.Entity<Item>()
+                .Property(i => i.Nome)
+                .IsRequired();
             #endregion
-
         }
 
         //Configurações padrões para todos os tipos de campos de acordo com o que foi estipulado

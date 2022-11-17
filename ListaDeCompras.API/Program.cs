@@ -1,4 +1,5 @@
 using ListaDeCompras.API.Data;
+using ListaDeCompras.API.Interfaces;
 using ListaDeCompras.API.Repositories;
 using Microsoft.EntityFrameworkCore;
 
