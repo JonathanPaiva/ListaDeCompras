@@ -4,7 +4,7 @@
     {
         public string Nome { get; set; }
         public string CriadoPor { get; set; }
-        public string EditadorPor { get; set; }
+        public string EditadoPor { get; set; }
         public bool Desativado { get; set; }
     }
 }

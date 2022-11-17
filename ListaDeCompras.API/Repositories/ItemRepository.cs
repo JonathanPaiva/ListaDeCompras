@@ -10,6 +10,7 @@ namespace ListaDeCompras.API.Repositories
     public class ItemRepository : IItemRepository
     {
         private readonly ApplicationDbContext _context;
+        private AmbienteRepository ambienteRepository;
 
         public ItemRepository(ApplicationDbContext context)
         {
@@ -18,7 +19,9 @@ namespace ListaDeCompras.API.Repositories
 
         public async Task<Item> CreateAsync(ItemDTO itemDTO)
         {
-            Ambiente ambiente = await _context.Ambientes.FindAsync(itemDTO.AmbienteId);
+            ambienteRepository = new AmbienteRepository(_context);
+
+            Ambiente ambiente = await ambienteRepository.GetAmbienteAsync(itemDTO.AmbienteId); //_context.Ambientes.FindAsync(itemDTO.AmbienteId);
             
             Item novoItem = null;
 
@@ -78,9 +81,9 @@ namespace ListaDeCompras.API.Repositories
 
         public async Task<IEnumerable<Item>> GetAsync()
         {
-            IList<Item> itens = await _context.Itens.ToListAsync();
+            IList<Item> itens = await _context.Itens.Include(i => i.Ambiente).ToListAsync();
 
-            return await _context.Itens.ToListAsync();
+            return itens;
         }
 
         public async Task<Item> GetAsync(Guid id)

@@ -1,4 +1,5 @@
 ﻿using ListaDeCompras.API.Data;
+using ListaDeCompras.API.DTO;
 using ListaDeCompras.API.Interfaces;
 using ListaDeCompras.API.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -14,12 +15,19 @@ namespace ListaDeCompras.API.Repositories
             this._context = context; 
         }
 
-        public async Task<Ambiente> CreateAmbienteAsync(Ambiente ambiente)
+        public async Task<Ambiente> CreateAmbienteAsync(AmbienteDTO ambienteDTO)
         {
-            _context.Ambientes.AddAsync(ambiente);
+            Ambiente novoAmbiente = new Ambiente(
+                ambienteDTO.Nome,
+                ambienteDTO.CriadoPor,
+                ambienteDTO.EditadoPor,
+                ambienteDTO.Desativado
+                );
+
+            _context.Ambientes.AddAsync(novoAmbiente);
             await _context.SaveChangesAsync();
 
-            return ambiente;
+            return novoAmbiente;
         }
 
         public async Task<bool> DeleteAmbienteAsync(Guid id)
@@ -37,7 +45,7 @@ namespace ListaDeCompras.API.Repositories
             return true;
         }
 
-        public async Task<Ambiente> UpdateAmbienteAsync([FromBody] Ambiente ambiente, Guid id)
+        public async Task<Ambiente> UpdateAmbienteAsync([FromBody] AmbienteDTO ambienteDTO, Guid id)
         {
             Ambiente ambienteDb = await GetAmbienteAsync(id);
 
@@ -46,10 +54,10 @@ namespace ListaDeCompras.API.Repositories
                 return ambienteDb;
             }
 
-            ambienteDb.Nome = ambiente.Nome;
-            ambienteDb.EditadoPor = ambiente.EditadoPor;
+            ambienteDb.Nome = ambienteDTO.Nome;
+            ambienteDb.EditadoPor = ambienteDTO.EditadoPor;
             ambienteDb.EditadoEm = DateTime.Now;
-            ambienteDb.Desativado = ambiente.Desativado;
+            ambienteDb.Desativado = ambienteDTO.Desativado;
 
             await _context.SaveChangesAsync();
 

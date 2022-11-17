@@ -1,6 +1,6 @@
-﻿using ListaDeCompras.API.Models;
+﻿using ListaDeCompras.API.DTO;
+using ListaDeCompras.API.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.ObjectModel;
 
 namespace ListaDeCompras.API.Interfaces
 {
@@ -10,9 +10,9 @@ namespace ListaDeCompras.API.Interfaces
 
         public Task<Ambiente> GetAmbienteAsync(Guid id);
 
-        public Task<Ambiente> CreateAmbienteAsync(Ambiente ambiente);
+        public Task<Ambiente> CreateAmbienteAsync(AmbienteDTO ambiente);
 
-        public Task<Ambiente> UpdateAmbienteAsync([FromBody] Ambiente ambiente, Guid id);
+        public Task<Ambiente> UpdateAmbienteAsync([FromBody] AmbienteDTO ambienteDTO, Guid id);
 
         public Task<bool> DeleteAmbienteAsync(Guid id);
     }

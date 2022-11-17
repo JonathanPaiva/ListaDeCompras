@@ -1,8 +1,7 @@
-﻿using ListaDeCompras.API.Interfaces;
+﻿using ListaDeCompras.API.DTO;
+using ListaDeCompras.API.Interfaces;
 using ListaDeCompras.API.Models;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ListaDeCompras.API.Controllers
 {
@@ -44,17 +43,22 @@ namespace ListaDeCompras.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Ambiente>> Create([FromBody] Ambiente ambiente)
+        public async Task<ActionResult<Ambiente>> Create([FromBody] AmbienteDTO ambienteDTO)
         {
-            await _ambienteRepository.CreateAmbienteAsync(ambiente);
+            Ambiente novoAmbiente = await _ambienteRepository.CreateAmbienteAsync(ambienteDTO);
 
-            return new CreatedResult($"ambientes/{ambiente.Id}", ambiente);  
+            if (novoAmbiente == null)
+            {
+                return new BadRequestResult();
+            }
+
+            return new CreatedResult($"ambientes/{novoAmbiente.Id}", novoAmbiente);  
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Ambiente>> UpdateAsync([FromBody] Ambiente ambiente, Guid id)
+        public async Task<ActionResult<Ambiente>> UpdateAsync([FromBody] AmbienteDTO ambienteDTO, Guid id)
         {
-            Ambiente ambienteDb = await _ambienteRepository.UpdateAmbienteAsync(ambiente, id);
+            Ambiente ambienteDb = await _ambienteRepository.UpdateAmbienteAsync(ambienteDTO, id);
 
             if(ambienteDb == null)
             {
