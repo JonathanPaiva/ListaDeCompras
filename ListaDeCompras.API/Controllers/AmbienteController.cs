@@ -25,10 +25,10 @@ namespace ListaDeCompras.API.Controllers
                         
             if (ambientes == null || ambientes.Count() == 0)
             {
-                return new NoContentResult();
+                return NoContent();
             }
 
-            return new OkObjectResult(ambientes);
+            return Ok(ambientes);
         }
 
         [HttpGet("{id}")]
@@ -38,10 +38,10 @@ namespace ListaDeCompras.API.Controllers
 
             if (ambiente == null)
             {
-                return new NotFoundResult();
+                return NotFound();
             }
 
-            return new OkObjectResult(ambiente);
+            return Ok(ambiente);
         }
 
         [HttpPost]
@@ -51,7 +51,7 @@ namespace ListaDeCompras.API.Controllers
 
             if (novoAmbiente == null)
             {
-                return new BadRequestResult();
+                return BadRequest();
             }
 
             return new CreatedResult($"ambientes/{novoAmbiente.Id}", novoAmbiente);  
@@ -64,10 +64,10 @@ namespace ListaDeCompras.API.Controllers
 
             if(ambienteDb == null)
             {
-                return new NotFoundResult();
+                return NotFound();
             }
 
-            return new OkObjectResult(ambienteDb);
+            return Ok(ambienteDb);
         }
 
         [HttpDelete("{id}")]
@@ -81,16 +81,16 @@ namespace ListaDeCompras.API.Controllers
             }
             catch(DbUpdateException ex)
             {
-                return new UnauthorizedResult();
+                return Unauthorized();
             }
             
             if (deletado)
             {
-                return new OkResult();
+                return Ok();
                 
             }
 
-            return new NotFoundResult();
+            return NotFound();
         }
     }
 }

@@ -19,14 +19,16 @@ namespace ListaDeCompras.API.Data
             base.OnModelCreating(builder);
 
             #region Item
-            builder.Entity<Item>()
-                .Property(i => i.Nome)
-                .IsRequired();
+                builder.Entity<Item>()
+                    .Property(i => i.Nome)
+                    .IsRequired();
+            #endregion
 
-            builder.Entity<Ambiente>()
-                .HasMany(i => i.Itens)
-                .WithOne(a => a.Ambiente)
-                .OnDelete(DeleteBehavior.Restrict);
+            #region Ambiente
+                builder.Entity<Ambiente>()
+                    .HasMany(i => i.Itens)
+                    .WithOne(a => a.Ambiente)
+                    .OnDelete(DeleteBehavior.Restrict);
             #endregion
         }
 

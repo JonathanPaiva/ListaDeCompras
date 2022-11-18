@@ -25,10 +25,10 @@ namespace ListaDeCompras.API.Controllers
                         
             if (itens == null || itens.Count() == 0)
             {
-                return new NoContentResult();
+                return NoContent();
             }
 
-            return new OkObjectResult(itens);
+            return Ok(itens);
         }
 
         [HttpGet("{id}")]
@@ -38,10 +38,10 @@ namespace ListaDeCompras.API.Controllers
 
             if (item == null)
             {
-                return new NotFoundResult();
+                return NotFound();
             }
 
-            return new OkObjectResult(item);
+            return Ok(item);
         }
 
         [HttpPost]
@@ -51,7 +51,7 @@ namespace ListaDeCompras.API.Controllers
 
             if (novoItem == null)
             {
-                return new NotFoundResult();
+                return NotFound();
             }
 
             return new CreatedResult($"ambientes/{novoItem.Id}", novoItem);  
@@ -64,10 +64,10 @@ namespace ListaDeCompras.API.Controllers
 
             if(itemDb == null)
             {
-                return new NotFoundResult();
+                return NotFound();
             }
 
-            return new OkObjectResult(itemDb);
+            return Ok(itemDb);
         }
 
         [HttpDelete("{id}")]
@@ -77,11 +77,11 @@ namespace ListaDeCompras.API.Controllers
 
             if (deletado)
             {
-                return new OkResult();
+                return Ok();
                 
             }
 
-            return new NotFoundResult();
+            return NotFound();
         }
     }
 }
